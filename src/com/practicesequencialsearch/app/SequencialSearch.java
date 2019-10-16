@@ -18,26 +18,33 @@ public class SequencialSearch
         int indexFound = -1;
         int index = 0;
         boolean isFound = true;
-        //
+
+        //Object declaration
         Random random = new Random(System.nanoTime());
         Scanner in = new Scanner(System.in);
 
-        //
+        //Array Initialization
         for (int i = 0; i < ELEMENTS_ARRAY; i++)
         {
             vector[i] = random.nextInt(101);
             System.out.print(vector[i]+ " ");
         }
 
-        do{
-            System.out.println("Input the value to find inside the array: ");
+        System.out.println();
+
+        do
+        {
+            //Input number to search
+            System.out.print("Input the value to find inside the array: ");
             numberToFind = in.nextInt();
 
+            //Validate number
             if(numberToFind < 0)
             {
                 System.out.println("Number must be greater than or equal to Zero!!!");
             }
 
+            //SequentialSearch algorithm
             for(int i = 0; i < ELEMENTS_ARRAY; i++)
             {
                 if(numberToFind == vector[i])
@@ -56,6 +63,8 @@ public class SequencialSearch
             }
         }while(numberToFind < 0);
 
+
+        //Previous algorithm implementation with loop while
         while (!isFound && index < ELEMENTS_ARRAY)
         {
             if(numberToFind == vector[index])
@@ -65,6 +74,7 @@ public class SequencialSearch
             }
             index++;
         }
+
         //Close input
         in.close();
     }
