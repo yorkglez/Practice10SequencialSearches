@@ -10,6 +10,24 @@ public class BinarySearch
         //Constants declaration
         final int ELEMENTS_ARRAY = 5;
 
+        /*
+            {5,10,14,21,30}
+            numberToFound = 5
+            5-1 / 2 =  2
+            pivotal = 14
+            -- 1 step --
+            {5,10}
+             {14}
+            {21,30}
+            -- 2 step --
+            2-1 = 1
+            {5}
+            {10}
+
+
+
+         */
+
         //Variable declaration
         int numberToFound = 0;
         int indexFound = -1;
@@ -32,9 +50,10 @@ public class BinarySearch
         }
 
         //Array Visualization
+        System.out.println("-- Disordered vector --");
         for (int i = 0; i < ELEMENTS_ARRAY; i++)
         {
-//            System.out.print(arrayNumbers[i]+" ");
+            System.out.print(arrayNumbers[i]+" ");
         }
 
         //Shorting algorithm
@@ -50,6 +69,9 @@ public class BinarySearch
                 }
             }
         }
+
+        //Array visualization
+        System.out.println("\n -- Ordered vector --");
         for(int i = 0; i < ELEMENTS_ARRAY; i++)
         {
             System.out.print(arrayNumbers[i] +" ");
@@ -58,32 +80,78 @@ public class BinarySearch
         //Ask the user for the number to find
         do
             {
-                System.out.println();
-                System.out.print("Input the number to find inside the array (0-100): ");
+                System.out.print("\n Input the number to find inside the array (0-100): ");
                 numberToFound = in.nextInt();
 
+                //Validate number
                 if(numberToFound < 0)
                 {
-                    System.out.println("Number must be zero or positive vaulue!!");
+                    System.out.print("\n Number must be zero or positive value!!");
                 }
 
-            //Binary Search algorithm
-            while (limInf <= limInf)
-            {
-                pivotal = limInf + (limSup - limInf) / 2;
-                if(numberToFound == arrayNumbers[pivotal])
+                //Binary Search algorithm
+                while (limInf <= limSup)
                 {
-                    indexFound = pivotal;
-                    break;
+                    /* *** Pseudocode ***
+                        arrayNumbers =  {5,10,14,21,25,29,30,31,38,50}
+                        limInf = 0;
+                        limSup = 10 - 1 = 9
+                        numberToFound = 30
+
+                        <-- First step -->
+                            while condition: 0 <= 9
+                                pivotal = limInf + (limSup - limInf)/2 >>  pivotal = 0 + (9 - 0) / 2 = 4
+
+                                if condition: numberToFound == arrayNumbers[pivotal] =  25   >> 30 == 25 -> false Then
+
+                                else if condition: numberFound > arrayNumbers[pivotal] = 25  >>  30 >  25 -> true Then
+                                    limInf = pivotal + 1 >> limInf = 4 + 1 = 5
+
+                                else if condition: numberToFound < arrayNumbers[pivotal] = 4 >> 30 < 25 -> false Then
+                            end while
+
+                        <-- End step -->
+
+                        <-- Second step -->
+                            while condition: 5 <= 9
+                                pivotal = limInf + (limSup - limInf)/2 >>  pivotal = 5 + (9 - 5 ) / 2 = 7
+
+                                if condition: numberToFound == arrayNumbers[pivotal] =  25   >> 30 == 31 -> false Then
+
+                                else if condition: numberFound > arrayNumbers[pivotal] = 25  >>  30 >  31 -> false Then
+
+
+                                else if condition: numberToFound < arrayNumbers[pivotal] = 4 >> 30 < 31 -> true Then
+                                    limSup = pivotal - 1 >> limSup = 7 - 1 = 6
+                             end while
+                        <-- End step -->
+                           while condition: 5 <= 6
+                                pivotal = limInf + (limSup - limInf)/2 >>  pivotal = 5 + (7 - 5 ) / 2 = 6
+
+                                if condition: numberToFound == arrayNumbers[pivotal] =  30  >> 30 == 30 -> true Then
+                                    indexFound = pivotal = 6
+                                    break >> Stop loop
+                             end while
+
+                        <-- Third step -->
+
+
+
+                    */
+                    pivotal = limInf + (limSup - limInf) / 2;
+                    if(numberToFound == arrayNumbers[pivotal])
+                    {
+                        indexFound = pivotal;
+                        break;
+                    }
+                    else if(numberToFound > arrayNumbers[pivotal])
+                    {
+                        limInf = pivotal + 1;
+                    }
+                    else if(numberToFound < arrayNumbers[pivotal]){
+                        limSup = pivotal - 1;
+                    }
                 }
-                else if(numberToFound > arrayNumbers[pivotal])
-                {
-                    limInf = pivotal + 1;
-                }
-                else if(numberToFound < arrayNumbers[pivotal]){
-                    limSup = pivotal - 1;
-                }
-            }
 
             if(indexFound != -1)
             {
